@@ -44,10 +44,21 @@ void anticlockwise(int num)
 void loop() 
 {
   // 512 is one cycle,it is defined by stepper itself
-  int tingzi=random(2666,6666);
-  clockwise(512);
-  
-  delay(tingzi); //delay random
-  delay(10);
-  anticlockwise(512);
+  // actual time cycle is from 0 to 110 second, so define the range to be 2 second to 100 second
+  // when the random value higher than 80 second, clockwise 2 to 3 second, then anticlockwis
+  int tingzi=random(12000,100000);
+  if(tingzi>80000)
+  {
+    clockwise(512);
+    delay(tingzi);
+    clockwise(512);
+    delay(random(600,1200));
+    anticlockwise(512);
+    delay(random(2000,6000));
+  }
+  else
+  {
+    clockwise(512);
+    delay(tingzi);
+  }
 }
